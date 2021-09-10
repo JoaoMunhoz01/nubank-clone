@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/pages/home/widgets/first_card.dart';
+import 'package:untitled/pages/home/widgets/second_card.dart';
+import 'package:untitled/pages/home/widgets/third_card.dart';
 import 'card_app.dart';
 
 class PageViewApp extends StatelessWidget {
@@ -36,12 +38,12 @@ class PageViewApp extends StatelessWidget {
             CardApp(
               child: FirstCard(),
             ),
-            /*CardApp(
+            CardApp(
               child: SecondCard(),
             ),
             CardApp(
               child: ThirdCard(),
-            ),*/
+            ),
           ],
         ),
       ),
