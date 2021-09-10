@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:untitled/pages/home/widgets/bottom_menu.dart';
 import 'package:untitled/pages/home/widgets/item_menu_bottom.dart';
 import 'package:untitled/pages/home/widgets/menu_app.dart';
 import 'package:untitled/pages/home/widgets/my_app_bar.dart';
@@ -47,67 +48,15 @@ class _HomePageState extends State<HomePage> {
             top: _screenHeight * .22,
             showMenu: _showMenu!,
           ),
-          AnimatedPositioned(
-            bottom: 0 + MediaQuery.of(context).padding.bottom,
-            right: 0,
-            left: 0,
-            duration: Duration(milliseconds: 200),
-            child: IgnorePointer(
-              ignoring: _showMenu!,
-              child: AnimatedOpacity(
-                duration: Duration(milliseconds: 300),
-                opacity: _showMenu! ? 0 : 1,
-                child: Container(
-                  height: _screenHeight * 0.16,
-                  color: Colors.purple[800],
-                  child: ListView(
-                    physics: BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      ItemMenuBottom(
-                        icon: Icons.person_add_alt,
-                        text: 'Indicar Amigos',
-                      ),
-                      ItemMenuBottom(
-                        icon: Icons.phone_android_sharp,
-                        text: 'Recarga de Celular',
-                      ),
-                      ItemMenuBottom(
-                        icon: Icons.chat_outlined,
-                        text: 'Cobrar',
-                      ),
-                      ItemMenuBottom(
-                        icon: Icons.monetization_on_outlined,
-                        text: 'Empréstimos',
-                      ),
-                      ItemMenuBottom(
-                        icon: Icons.move_to_inbox,
-                        text: 'Depositar',
-                      ),
-                      ItemMenuBottom(
-                        icon: Icons.mobile_screen_share,
-                        text: 'Transferir',
-                      ),
-                      ItemMenuBottom(
-                        icon: Icons.format_align_center,
-                        text: 'Ajustar Limite',
-                      ),
-                      ItemMenuBottom(
-                        icon: Icons.chrome_reader_mode,
-                        text: 'Pagar',
-                      ),
-                      ItemMenuBottom(
-                        icon: Icons.lock_open,
-                        text: 'Bloquear Cartão',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          PageViewApp(
+          MenuBottom(
             showMenu: _showMenu!,
+          ),
+          MyDotsApp(
+              showMenu: _showMenu!,
+              top: _screenHeight * 0.80,
+              currentIndex: _currentIndex),
+          PageViewApp(
+            yPosition: _yPosition,
             top: _yPosition,
             onChanged: (index) {
               setState(() {
@@ -128,9 +77,9 @@ class _HomePageState extends State<HomePage> {
                 _yPosition = _yPosition += details.delta.dy;
                 //print('${_yPosition.toString()} - ${positionTopMax.toString()} - ${positionBottomMax.toString()}');
 
-                if (_yPosition >= (positionBottomMax)) {
+                if (_yPosition > (positionBottomMax)) {
                   _showMenu = true;
-                } else if (_yPosition <= (positionTopMax)) {
+                } else if (_yPosition < (positionTopMax)) {
                   _showMenu = false;
                 }
 
@@ -147,10 +96,7 @@ class _HomePageState extends State<HomePage> {
               });
             },
           ),
-          MyDotsApp(
-              showMenu: _showMenu!,
-              top: _screenHeight * 0.80,
-              currentIndex: _currentIndex),
+
         ],
       ),
     );

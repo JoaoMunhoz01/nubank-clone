@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/pages/home/widgets/first_card.dart';
 import 'card_app.dart';
 
 class PageViewApp extends StatelessWidget {
   final double top;
   final ValueChanged<int> onChanged;
   final GestureDragUpdateCallback onPanUpdate;
-  final bool showMenu;
+  final double yPosition;
 
   const PageViewApp(
       {Key? key,
       required this.top,
       required this.onChanged,
       required this.onPanUpdate,
-      required this.showMenu})
+      required this.yPosition})
       : super(key: key);
 
   @override
@@ -28,13 +29,17 @@ class PageViewApp extends StatelessWidget {
         onPanUpdate: onPanUpdate,
         child: PageView(
           onPageChanged: onChanged,
-          physics: showMenu
-              ? NeverScrollableScrollPhysics()
-              : BouncingScrollPhysics(),
+          physics: yPosition!= MediaQuery.of(context).size.height* .24 ? NeverScrollableScrollPhysics() : BouncingScrollPhysics(),
           children: <Widget>[
-            CardApp(),
-            CardApp(),
-            CardApp(),
+            CardApp(
+              child: FirstCard(),
+            ),
+            /*CardApp(
+              child: SecondCard(),
+            ),
+            CardApp(
+              child: ThirdCard(),
+            ),*/
           ],
         ),
       ),
