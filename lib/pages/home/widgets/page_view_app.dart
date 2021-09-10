@@ -29,7 +29,9 @@ class PageViewApp extends StatelessWidget {
         onPanUpdate: onPanUpdate,
         child: PageView(
           onPageChanged: onChanged,
-          physics: yPosition!= MediaQuery.of(context).size.height* .24 ? NeverScrollableScrollPhysics() : BouncingScrollPhysics(),
+          physics: yPosition != MediaQuery.of(context).size.height * .24
+              ? NeverScrollableScrollPhysics()
+              : BouncingScrollPhysics(),
           children: <Widget>[
             CardApp(
               child: FirstCard(),
